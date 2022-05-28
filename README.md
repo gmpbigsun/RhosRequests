@@ -6,6 +6,7 @@ Built on 1.4-stable (tModLoader v2022.4.62.6)
 
 ## Arena Boots
 Arena boots allow you to automatically place blocks as you walk. Enable automatic placement by pressing the default button 'p'.
+
 ![](Assets/ArenaBoots.gif)
 
 ##### Options:
