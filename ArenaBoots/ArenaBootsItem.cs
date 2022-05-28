@@ -29,21 +29,20 @@ namespace RhosRequests.ArenaBoots
             {
                 Point tileLocationBottom = new Vector2(Main.LocalPlayer.Center.X, Main.LocalPlayer.position.Y + 48f).ToTileCoordinates();
                 int tileToPlace = heldItem.createTile;
-                
-                
-                
-                if (WorldGen.PlaceTile(tileLocationBottom.X, tileLocationBottom.Y, tileToPlace, false, false, style: heldItem.useStyle) && heldItem.stack > 0)
+
+
+                if (WorldGen.PlaceTile(tileLocationBottom.X, tileLocationBottom.Y, tileToPlace, false, false, style: heldItem.placeStyle) && heldItem.stack > 0)
                     heldItem.stack--;
                 if (Main.LocalPlayer.direction == -1 && heldItem.stack > 0)
                 {
                     Point tileLocationBottomLeft = new Vector2(Main.LocalPlayer.Center.X - 16, Main.LocalPlayer.position.Y + 48f).ToTileCoordinates();
-                    if (WorldGen.PlaceTile(tileLocationBottomLeft.X, tileLocationBottomLeft.Y, tileToPlace, false, false, style: heldItem.useStyle) && heldItem.stack > 0)
+                    if (WorldGen.PlaceTile(tileLocationBottomLeft.X, tileLocationBottomLeft.Y, tileToPlace, false, false, style: heldItem.placeStyle) && heldItem.stack > 0)
                         heldItem.stack--;
                 }
                 else if (Main.LocalPlayer.direction == 1 && heldItem.stack > 0)
                 {
                     Point tileLocationBottomRight = new Vector2(Main.LocalPlayer.Center.X + 16, Main.LocalPlayer.position.Y + 48f).ToTileCoordinates();
-                    if (WorldGen.PlaceTile(tileLocationBottomRight.X, tileLocationBottomRight.Y, tileToPlace, false, false, style: heldItem.useStyle) && heldItem.stack > 0)
+                    if (WorldGen.PlaceTile(tileLocationBottomRight.X, tileLocationBottomRight.Y, tileToPlace, false, false, style: heldItem.placeStyle) && heldItem.stack > 0)
                         heldItem.stack--;
                 }
             }
@@ -54,7 +53,7 @@ namespace RhosRequests.ArenaBoots
             CreateRecipe(1)
                 .AddIngredient(ItemID.HermesBoots, 1)
                 .AddIngredient(ItemID.Wire, 20)
-                .AddIngredient(ItemID.WoodPlatform, 250)
+                .AddRecipeGroup("RhosRequests:Platforms")
                 .AddTile(TileID.TinkerersWorkbench)
                 .Register();
         }
