@@ -43,18 +43,30 @@ namespace RhosRequests.ArenaBoots
                 int tileToPlace = heldItem.createTile;
 
                 if (WorldGen.PlaceTile(tileLocationBottom.X, tileLocationBottom.Y, tileToPlace, false, false, style: heldItem.placeStyle) && heldItem.stack > 0)
+                {
                     heldItem.stack--;
+                    if (Main.netMode != NetmodeID.SinglePlayer)
+                        NetMessage.SendData(MessageID.TileManipulation, -1, -1, null, 1, tileLocationBottom.X, tileLocationBottom.Y, tileToPlace);
+                }
                 if (Main.LocalPlayer.direction == -1 && heldItem.stack > 0)
                 {
                     Point tileLocationBottomLeft = new Vector2(Main.LocalPlayer.Center.X - 16, Main.LocalPlayer.position.Y + 48f).ToTileCoordinates();
                     if (WorldGen.PlaceTile(tileLocationBottomLeft.X, tileLocationBottomLeft.Y, tileToPlace, false, false, style: heldItem.placeStyle) && heldItem.stack > 0)
+                    {
                         heldItem.stack--;
+                        if (Main.netMode != NetmodeID.SinglePlayer)
+                            NetMessage.SendData(MessageID.TileManipulation, -1, -1, null, 1, tileLocationBottomLeft.X, tileLocationBottomLeft.Y, tileToPlace);
+                    }
                 }
                 else if (Main.LocalPlayer.direction == 1 && heldItem.stack > 0)
                 {
                     Point tileLocationBottomRight = new Vector2(Main.LocalPlayer.Center.X + 16, Main.LocalPlayer.position.Y + 48f).ToTileCoordinates();
                     if (WorldGen.PlaceTile(tileLocationBottomRight.X, tileLocationBottomRight.Y, tileToPlace, false, false, style: heldItem.placeStyle) && heldItem.stack > 0)
+                    {
                         heldItem.stack--;
+                        if (Main.netMode != NetmodeID.SinglePlayer)
+                            NetMessage.SendData(MessageID.TileManipulation, -1, -1, null, 1, tileLocationBottomRight.X, tileLocationBottomRight.Y, tileToPlace);
+                    }
                 }
             }
         }
