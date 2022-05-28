@@ -2,4 +2,4 @@ Compilation of requested mods over at tmodloader discord.
 Repository available at: https://github.com/gmpbigsun/RhosRequests
 
 Content:  
-- Arena Boots
+- Arena Boots: allows you to automatically place blocks below you as you walk
