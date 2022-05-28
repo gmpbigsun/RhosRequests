@@ -1,2 +1,1 @@
-Compilation of requested mods over at tmodloader discord
-Repository available at: https://github.com/gmpbigsun/RhosRequests/
+Compilation of requested mods over at tmodloader discord. Repository available at: https://github.com/gmpbigsun/RhosRequests/
