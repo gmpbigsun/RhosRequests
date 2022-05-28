@@ -5,6 +5,7 @@ using Terraria.Net;
 using Terraria.GameContent.NetModules;
 using Terraria.GameContent.Creative;
 using Microsoft.Xna.Framework;
+using System.Collections.Generic;
 
 namespace RhosRequests.ArenaBoots
 {
@@ -17,7 +18,7 @@ namespace RhosRequests.ArenaBoots
 
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("This is a modded Item."); // The (English) text shown below your item's name
+            Tooltip.SetDefault("Provides the ability to place platforms as you walk.\nEnable this item (default 'p') under controls."); // The (English) text shown below your item's name
         }
 
         public override void SetDefaults()
@@ -69,6 +70,13 @@ namespace RhosRequests.ArenaBoots
                     }
                 }
             }
+        }
+
+        public override void ModifyTooltips(List<TooltipLine> tooltips)
+        {
+            TooltipLine line = new TooltipLine(Mod, "ItemName", "Arena Boots");
+            tooltips[0] = line;
+            base.ModifyTooltips(tooltips);
         }
 
         public override void AddRecipes()
