@@ -17,12 +17,12 @@ namespace RhosRequests.ArenaBoots
                 if (isOn == false)
                 {
                     isOn = true;
-                    Main.NewText($"Arena Boots enabled");
+                    Main.NewText($"Arena Boots placement mode enabled");
                 }
                 else
                 {
                     isOn = false;
-                    Main.NewText($"Arena Boots disabled");
+                    Main.NewText($"Arena Boots placement mode disabled");
                 }
             }
         }
