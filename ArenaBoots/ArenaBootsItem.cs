@@ -1,9 +1,6 @@
 ﻿using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Terraria.Net;
-using Terraria.GameContent.NetModules;
-using Terraria.GameContent.Creative;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 
@@ -30,6 +27,7 @@ namespace RhosRequests.ArenaBoots
         {
             player.moveSpeed = 1.25f;
             player.maxRunSpeed = 1f;
+
             Item heldItem = Main.LocalPlayer.HeldItem;
 
             if (heldItem.netID == 0)
@@ -43,32 +41,28 @@ namespace RhosRequests.ArenaBoots
                 Point tileLocationBottom = new Vector2(Main.LocalPlayer.Center.X, Main.LocalPlayer.position.Y + 48f).ToTileCoordinates();
                 int tileToPlace = heldItem.createTile;
 
-                if (WorldGen.PlaceTile(tileLocationBottom.X, tileLocationBottom.Y, tileToPlace, false, false, style: heldItem.placeStyle) && heldItem.stack > 0)
-                {
-                    heldItem.stack--;
-                    if (Main.netMode != NetmodeID.SinglePlayer)
-                        NetMessage.SendData(MessageID.TileManipulation, -1, -1, null, 1, tileLocationBottom.X, tileLocationBottom.Y, tileToPlace);
-                }
+                PlaceTile(tileLocationBottom, heldItem, tileToPlace);
+
                 if (Main.LocalPlayer.direction == -1 && heldItem.stack > 0)
                 {
                     Point tileLocationBottomLeft = new Vector2(Main.LocalPlayer.Center.X - 16, Main.LocalPlayer.position.Y + 48f).ToTileCoordinates();
-                    if (WorldGen.PlaceTile(tileLocationBottomLeft.X, tileLocationBottomLeft.Y, tileToPlace, false, false, style: heldItem.placeStyle) && heldItem.stack > 0)
-                    {
-                        heldItem.stack--;
-                        if (Main.netMode != NetmodeID.SinglePlayer)
-                            NetMessage.SendData(MessageID.TileManipulation, -1, -1, null, 1, tileLocationBottomLeft.X, tileLocationBottomLeft.Y, tileToPlace);
-                    }
+                    PlaceTile(tileLocationBottomLeft, heldItem, tileToPlace);
                 }
                 else if (Main.LocalPlayer.direction == 1 && heldItem.stack > 0)
                 {
                     Point tileLocationBottomRight = new Vector2(Main.LocalPlayer.Center.X + 16, Main.LocalPlayer.position.Y + 48f).ToTileCoordinates();
-                    if (WorldGen.PlaceTile(tileLocationBottomRight.X, tileLocationBottomRight.Y, tileToPlace, false, false, style: heldItem.placeStyle) && heldItem.stack > 0)
-                    {
-                        heldItem.stack--;
-                        if (Main.netMode != NetmodeID.SinglePlayer)
-                            NetMessage.SendData(MessageID.TileManipulation, -1, -1, null, 1, tileLocationBottomRight.X, tileLocationBottomRight.Y, tileToPlace);
-                    }
+                    PlaceTile(tileLocationBottomRight, heldItem, tileToPlace);
                 }
+            }
+        }
+
+        private static void PlaceTile(Point tilePosition, Item heldItem, int tileToPlace)
+        {
+            if (WorldGen.PlaceTile(tilePosition.X, tilePosition.Y, tileToPlace, false, false, style: heldItem.placeStyle) && heldItem.stack > 0)
+            {
+                heldItem.stack--;
+                if (Main.netMode != NetmodeID.SinglePlayer)
+                    NetMessage.SendData(MessageID.TileManipulation, -1, -1, null, 1, tilePosition.X, tilePosition.Y, tileToPlace);
             }
         }
 
@@ -84,7 +78,7 @@ namespace RhosRequests.ArenaBoots
             CreateRecipe(1)
                 .AddIngredient(ItemID.HermesBoots, 1)
                 .AddIngredient(ItemID.Wire, 20)
-                .AddRecipeGroup("RhosRequests:Platforms")
+                .AddRecipeGroup("RhosRequests:Platforms", 250)
                 .AddTile(TileID.TinkerersWorkbench)
                 .Register();
         }
