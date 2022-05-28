@@ -1,1 +1,5 @@
-Compilation of requested mods over at tmodloader discord. \n Repository available at: https://github.com/gmpbigsun/RhosRequests/ \n Content: \n - Rocket Boots
+Compilation of requested mods over at tmodloader discord. 
+Repository available at: https://github.com/gmpbigsun/RhosRequests
+
+Content:  
+- Arena Boots
