@@ -10,6 +10,11 @@ namespace RhosRequests.ArenaBoots
 {
     public class ArenaBootsItem : ModItem
     {
+        public override bool IsLoadingEnabled(Mod mod)
+        {
+            return ModContent.GetInstance<RhosRequests>().EnableArenaBoots;
+        }
+
         public override void SetStaticDefaults()
         {
             Tooltip.SetDefault("This is a modded Item."); // The (English) text shown below your item's name
@@ -25,11 +30,17 @@ namespace RhosRequests.ArenaBoots
             player.moveSpeed = 1.25f;
             player.maxRunSpeed = 1f;
             Item heldItem = Main.LocalPlayer.HeldItem;
-            if (Main.LocalPlayer.GetModPlayer<ArenaBootsPlayer>().isOn && heldItem.maxStack > 1 && Main.LocalPlayer.velocity.Y == 0 && Main.LocalPlayer.oldVelocity.Y == 0 && heldItem.createTile == TileID.Platforms)
+
+            if (heldItem.netID == 0)
+                return;
+
+            bool groundCheck = ModContent.GetInstance<RhosRequests>().EnableGroundCheckArenaBoots ? Main.LocalPlayer.velocity.Y == 0 && Main.LocalPlayer.oldVelocity.Y == 0 : true;
+            bool allowBuildingBlock = ModContent.GetInstance<RhosRequests>().EnableBuildingBlocksArenaBoots ? heldItem.createTile == TileID.Stone || heldItem.createTile == TileID.Dirt || heldItem.createTile == TileID.WoodBlock : false;
+
+            if (Main.LocalPlayer.GetModPlayer<ArenaBootsPlayer>().isOn && heldItem.maxStack > 1 && (heldItem.createTile == TileID.Platforms || allowBuildingBlock) && groundCheck)
             {
                 Point tileLocationBottom = new Vector2(Main.LocalPlayer.Center.X, Main.LocalPlayer.position.Y + 48f).ToTileCoordinates();
                 int tileToPlace = heldItem.createTile;
-
 
                 if (WorldGen.PlaceTile(tileLocationBottom.X, tileLocationBottom.Y, tileToPlace, false, false, style: heldItem.placeStyle) && heldItem.stack > 0)
                     heldItem.stack--;
