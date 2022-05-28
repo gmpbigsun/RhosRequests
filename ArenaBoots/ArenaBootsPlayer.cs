@@ -9,6 +9,7 @@ namespace RhosRequests.ArenaBoots
     public class ArenaBootsPlayer : ModPlayer
     {
         public bool isOn = false;
+
         public override void ProcessTriggers(TriggersSet triggersSet)
         {
             if (KeybindSystem.ToggleArenaBoots.JustPressed)
