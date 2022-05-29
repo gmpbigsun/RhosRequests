@@ -2,7 +2,6 @@
 # RhosRequests
 
 This repository contains all the source code for community requested mods. 
-Built on 1.4-stable (tModLoader v2022.4.62.6)
 
 Found on: https://steamcommunity.com/sharedfiles/filedetails/?id=2813723898
 
