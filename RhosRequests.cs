@@ -12,7 +12,7 @@ namespace RhosRequests
         [Header("Arena Boots")] 
         [Label("Enable Arena Boots")] 
         [Tooltip("This system places platforms you hold automatically as you walk")] 
-        [DefaultValue(false)] 
+        [DefaultValue(true)] 
         [ReloadRequired] 
         public bool EnableArenaBoots;
 
