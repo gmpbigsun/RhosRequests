@@ -34,19 +34,17 @@ namespace RhosRequests
         public bool EnableDamageVariation;
 
         [Label("Maximum Variance in %:")]
-        [Tooltip("Increase the maximum damage range variation by ... %")]
         [Range(100, 1000)]
         [Increment(1)]
         [DrawTicks]
-        [DefaultValue(200)]
+        [DefaultValue(125)]
         public int IncMaxVariance;
 
         [Label("Minimum Variance in %:")]
-        [Tooltip("Decrease the minimum damage range variation by ... %")]
         [Range(0, 100)]
         [Increment(1)]
         [DrawTicks]
-        [DefaultValue(50)]
+        [DefaultValue(75)]
         public int DecMinVariance;
     }
 }
