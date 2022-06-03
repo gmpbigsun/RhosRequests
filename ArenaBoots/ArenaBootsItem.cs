@@ -10,7 +10,7 @@ namespace RhosRequests.ArenaBoots
     {
         public override bool IsLoadingEnabled(Mod mod)
         {
-            return ModContent.GetInstance<RhosRequests>().EnableArenaBoots;
+            return ModContent.GetInstance<RhosRequestsConfig>().EnableArenaBoots;
         }
 
         public override void SetStaticDefaults()
@@ -33,8 +33,8 @@ namespace RhosRequests.ArenaBoots
             if (heldItem.netID == 0)
                 return;
 
-            bool groundCheck = ModContent.GetInstance<RhosRequests>().EnableGroundCheckArenaBoots ? Main.LocalPlayer.velocity.Y == 0 && Main.LocalPlayer.oldVelocity.Y == 0 : true;
-            bool allowBuildingBlock = ModContent.GetInstance<RhosRequests>().EnableBuildingBlocksArenaBoots ? heldItem.createTile == TileID.Stone || heldItem.createTile == TileID.Dirt || heldItem.createTile == TileID.WoodBlock : false;
+            bool groundCheck = ModContent.GetInstance<RhosRequestsConfig>().EnableGroundCheckArenaBoots ? Main.LocalPlayer.velocity.Y == 0 && Main.LocalPlayer.oldVelocity.Y == 0 : true;
+            bool allowBuildingBlock = ModContent.GetInstance<RhosRequestsConfig>().EnableBuildingBlocksArenaBoots ? heldItem.createTile == TileID.Stone || heldItem.createTile == TileID.Dirt || heldItem.createTile == TileID.WoodBlock : false;
 
             if (Main.LocalPlayer.GetModPlayer<ArenaBootsPlayer>().isOn && heldItem.maxStack > 1 && (heldItem.createTile == TileID.Platforms || allowBuildingBlock) && groundCheck)
             {

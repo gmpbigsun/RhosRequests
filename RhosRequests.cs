@@ -1,29 +1,26 @@
-using System.ComponentModel;
-using Terraria.ModLoader.Config;
+﻿using RhosRequests.Helper;
+using System;
+using Terraria;
+using Terraria.Localization;
+using Terraria.ModLoader;
 
 namespace RhosRequests
 {
-    public class RhosRequests : ModConfig
+    public class RhosRequests : Mod
     {
-        // ConfigScope.ClientSide should be used for client side, usually visual or audio tweaks.
-        // ConfigScope.ServerSide should be used for basically everything else, including disabling items or changing NPC behaviours
-        public override ConfigScope Mode => ConfigScope.ServerSide;
-        
-        [Header("Arena Boots")] 
-        [Label("Enable Arena Boots")] 
-        [Tooltip("This system places platforms you hold automatically as you walk")] 
-        [DefaultValue(true)] 
-        [ReloadRequired] 
-        public bool EnableArenaBoots;
+        public override void Load()
+        {
+            base.Load();
+            if (ModContent.GetInstance<RhosRequestsConfig>().EnableDamageVariation)
+            {
+                On.Terraria.Main.DamageVar += (orig, damage, luck) => (int)Math.Round(damage * Main.rand.NextFloat(ModContent.GetInstance<RhosRequestsConfig>().IncMaxVariance / 100f, ModContent.GetInstance<RhosRequestsConfig>().DecMinVariance / 100f));
+            }
+        }
 
-        [Label("Enable GroundCheck")]
-        [Tooltip("This allows you to only be able to place platforms when standing on tiles")]
-        [DefaultValue(true)]
-        public bool EnableGroundCheckArenaBoots;
-
-        [Label("Allow Stone, Dirt and Wood Blocks")]
-        [Tooltip("This allows you to place specific buildings blocks beside platforms")]
-        [DefaultValue(false)]
-        public bool EnableBuildingBlocksArenaBoots;
+        public override void AddRecipeGroups()
+        {
+            RecipeGroup group = new RecipeGroup(() => Language.GetTextValue("LegacyMisc.37") + " Platform", ItemGroups.platforms);
+            RecipeGroup.RegisterGroup("RhosRequests:Platforms", group);
+        }
     }
 }
