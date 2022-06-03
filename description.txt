@@ -3,3 +3,4 @@ Repository available at: https://github.com/gmpbigsun/RhosRequests
 
 Content:  
 - Arena Boots: allows you to automatically place blocks below you as you walk
+- Damage Variance: allows you to overwrite Terraria's damage variance
