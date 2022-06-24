@@ -5,6 +5,8 @@ This repository contains all the source code for community requested mods.
 
 Found on: https://steamcommunity.com/sharedfiles/filedetails/?id=2813723898
 
+Discord Link: https://discord.gg/EC7PybhE
+
 ## Arena Boots
 Arena boots allow you to automatically place blocks as you walk. Enable automatic placement by pressing the default button 'p'.
 
